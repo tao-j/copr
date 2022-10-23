@@ -1,0 +1,63 @@
+* Sun Aug 28 2022 Oleg Girko <ol@infoserver.lv> - 3.50-1
+- Update to 3.50
+
+* Sun Jul 11 2021 Oleg Girko <ol@infoserver.lv> - 2.3-2
+- Require gpio-udev-rules
+
+* Fri Jul 09 2021 Oleg Girko <ol@infoserver.lv> - 2.3-1
+- Update to 2.3
+- Require getent and useradd utilities for preinstall script
+- Require gpio group
+
+* Wed Oct 21 2020 Oleg Girko <ol@infoserver.lv> - 2.2-2
+- Add patch to fix paths of various system utilities
+
+* Tue Oct 20 2020 Oleg Girko <ol@infoserver.lv> - 2.2-1
+- Update to 2.2
+
+* Sun Oct 11 2020 Oleg Girko <ol@infoserver.lv> - 2.1-1
+- Update to 2.1
+
+* Wed Oct 07 2020 Oleg Girko <ol@infoserver.lv> - 2.0-1
+- Update to 2.0
+
+* Wed Sep 23 2020 Oleg Girko <ol@infoserver.lv> - 1.102-2
+- Enable unit tests (just to check syntax)
+- Fix python3-libgpiod dependency
+
+* Fri Sep 18 2020 Oleg Girko <ol@infoserver.lv> - 1.102-1
+- Update to 1.102
+
+* Mon Sep 14 2020 Oleg Girko <ol@infoserver.lv> - 1.100-1
+- Update to 1.100
+
+* Tue Sep 01 2020 Oleg Girko <ol@infoserver.lv> - 1.98-1
+- Update to 1.98
+
+* Mon Aug 31 2020 Oleg Girko <ol@infoserver.lv> - 1.97-1
+- Update to 1.97
+
+* Tue Aug 25 2020 Oleg Girko <ol@infoserver.lv> - 1.95-1
+- Update to 1.95
+- Make kvmd-nginx subpackage require nginx
+
+* Fri Aug 21 2020 Oleg Girko <ol@infoserver.lv> - 1.92-2
+- Split more correctly into more subpackages
+
+* Thu Aug 20 2020 Oleg Girko <ol@infoserver.lv> - 1.92-1
+- Update to 1.91
+- Add subpackage with Nginx configs
+- Fix Nginx binary path in service file
+- Fix groups of kvmd user
+
+* Wed Aug 19 2020 Oleg Girko <ol@infoserver.lv> - 1.91-1
+- Update to 1.91
+- Fix patch to remove all uses of assignment expressions
+
+* Tue Aug 18 2020 Oleg Girko <ol@infoserver.lv> - 1.90-2
+- Fix runtime dependency
+- Drop unneeded build dependencies
+
+* Mon Aug 17 2020 Oleg Girko <ol@infoserver.lv> - 1.90-1
+- Initial import
+

@@ -1,0 +1,38 @@
+From 202ce425431b31c9931c933544f13966d8c90f1b Mon Sep 17 00:00:00 2001
+From: Oleg Girko <ol@infoserver.lv>
+Date: Wed, 21 Oct 2020 03:27:52 +0100
+Subject: [PATCH] Fix paths of various system utilities.
+
+Paths of dnsmasq, ip, iptables, systemctl changed
+in otgnet default configuration to work in Debian and Fedora.
+
+Signed-off-by: Oleg Girko <ol@infoserver.lv>
+---
+ kvmd/apps/__init__.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/kvmd/apps/__init__.py b/kvmd/apps/__init__.py
+index 6d23585d..b1cbc29c 100644
+--- a/kvmd/apps/__init__.py
++++ b/kvmd/apps/__init__.py
+@@ -528,7 +528,7 @@ def _get_config_scheme() -> Dict:
+         "otgnet": {
+             "iface": {
+                 "net":    Option("169.254.0.0/28", type=functools.partial(valid_net, v6=False)),
+-                "ip_cmd": Option(["/usr/bin/ip"],  type=valid_command),
++                "ip_cmd": Option(["/sbin/ip"],  type=valid_command),
+             },
+ 
+             "firewall": {
+@@ -563,7 +563,7 @@ def _get_config_scheme() -> Dict:
+                 "post_start_cmd_append": Option([], type=valid_options),
+ 
+                 "pre_stop_cmd": Option([
+-                    "/usr/bin/systemctl",
++                    "/bin/systemctl",
+                     "stop",
+                     "kvmd-otgnet-dnsmasq",
+                 ], type=valid_command),
+-- 
+2.37.2
+
