@@ -1,5 +1,5 @@
 Name: ustreamer
-Version: 5.21
+Version: 5.24
 Release: 1%{?dist}
 Summary: Lightweight and fast MJPG-HTTP streamer
 License: GPLv3+
