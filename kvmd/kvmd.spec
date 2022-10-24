@@ -49,7 +49,7 @@ Requires: python3dist(pyyaml)
 Requires: python3dist(aiohttp) >= 3.7.4
 Requires: python3dist(aiofiles)
 Requires: python3dist(passlib)
-Requires: python3dist(python-periphery)
+#Requires: python3dist(python-periphery)
 Requires: python3dist(pyserial)
 Requires: python3dist(setproctitle)
 Requires: python3dist(spidev)
