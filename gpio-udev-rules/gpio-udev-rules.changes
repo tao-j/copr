@@ -1,0 +1,5 @@
+* Sun Jul 11 2021 Oleg Girko <ol@infoserver.lv> - 1.0.1-1
+- Provide group(gpio)
+
+* Sun Jul 11 2021 Oleg Girko <ol@infoserver.lv> - 1.0.0-1
+- Initial import
