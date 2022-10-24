@@ -21,13 +21,13 @@
 %endif
 
 Name:           janus-gateway
-Version:        1.0.4
+Version:        1.1.0
 Release:        0
 License:        GPL-3.0-only
 Summary:        Janus WebRTC Gateway
 URL:            https://github.com/meetecho/janus-gateway
 Group:          Productivity/Networking/Other
-Source:         %{name}-%{version}.tar.xz
+Source:         https://github.com/meetecho/janus-gateway/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        janus.service
 Source100:      %{name}-rpmlintrc
 # for run autogen.sh
@@ -37,17 +37,17 @@ BuildRequires:  libtool
 # basic dependencies
 BuildRequires:  pkg-config
 BuildRequires:  curl-devel
+BuildRequires:  libsrtp-devel
 BuildRequires:  gengetopt
 BuildRequires:  libconfig-devel
 BuildRequires:  sofia-sip-devel
 BuildRequires:  pkgconfig(ini_config)
 BuildRequires:  pkgconfig(jansson)
 BuildRequires:  pkgconfig(libmicrohttpd)
-BuildRequires:  pkgconfig(libsrtp) >= 1.4.5
 BuildRequires:  pkgconfig(lua)
 BuildRequires:  pkgconfig(nice)
 BuildRequires:  pkgconfig(ogg)
-BuildRequires:  pkgconfig(openssl) >= 1.0.1e
+BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(opus)
 %if %{with janus_postprocessing}
 BuildRequires:  libavcodec-devel
@@ -57,9 +57,9 @@ BuildRequires:  libavutil-devel
 # data channel support
 BuildRequires:  usrsctp-devel
 # websockets support
-BuildRequires:  libwebsockets-devel >= 4.0.0
+BuildRequires:  libwebsockets-devel
 # MQTT support
-BuildRequires:  libpaho-mqtt-devel
+# BuildRequires:  libpaho-mqtt-devel
 Requires(pre):  shadow
 BuildRequires:  pkgconfig(systemd)
 %{?systemd_ordering}
