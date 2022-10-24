@@ -1,3 +1,6 @@
+* Sun Oct 23 2022 Tao Jin <tao-j@outlook.com> - 3.156-1
+- Update to 3.156, add patch to remove unsupported type annotation
+
 * Sun Aug 28 2022 Oleg Girko <ol@infoserver.lv> - 3.50-1
 - Update to 3.50
 

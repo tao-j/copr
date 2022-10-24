@@ -1,11 +1,12 @@
 Name: kvmd
-Version: 3.50
+Version: 3.156
 Release: 1%{?dist}
 Summary: The main Pi-KVM daemon
 License: GPLv3+
 URL: https://github.com/pikvm/kvmd
 Source: https://github.com/pikvm/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0: kvmd-otgnet-fix-paths.patch
+Patch1: kvmd-remove-unsupported-type-annotation.patch
 BuildArch: noarch
 BuildRequires: python3-devel
 BuildRequires: python3-rpm
@@ -14,7 +15,7 @@ BuildRequires: python3dist(pyyaml)
 BuildRequires: python3dist(aiohttp) >= 3.7.4
 BuildRequires: python3dist(aiofiles)
 BuildRequires: python3dist(passlib)
-BuildRequires: python3dist(python-periphery)
+# BuildRequires: python3dist(python-periphery)
 BuildRequires: python3dist(pyserial)
 BuildRequires: python3dist(setproctitle)
 BuildRequires: python3dist(spidev)
@@ -22,6 +23,8 @@ BuildRequires: python3dist(psutil)
 BuildRequires: python3dist(netifaces)
 BuildRequires: python3dist(systemd-python)
 BuildRequires: python3dist(dbus-python)
+BuildRequires: python3dist(dbus-next)
+BuildRequires: python3dist(zstandard)
 BuildRequires: python3dist(pygments)
 BuildRequires: python3dist(pyghmi)
 BuildRequires: python3dist(python-pam)
@@ -106,6 +109,7 @@ Nginx configuration for Pi-KVM.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 CFLAGS="%{optflags}" %{__python3} setup.py build
