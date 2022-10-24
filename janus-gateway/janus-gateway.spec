@@ -22,7 +22,7 @@
 
 Name:           janus-gateway
 Version:        1.1.0
-Release:        0
+Release:        1%{?dist}
 License:        GPL-3.0-only
 Summary:        Janus WebRTC Gateway
 URL:            https://github.com/meetecho/janus-gateway
