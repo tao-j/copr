@@ -22,7 +22,7 @@
 
 Name:           janus-gateway
 Version:        1.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPL-3.0-only
 Summary:        Janus WebRTC Gateway
 URL:            https://github.com/meetecho/janus-gateway
@@ -120,17 +120,6 @@ install -D -d -m 0750 %{buildroot}%{home}
   %{_sbindir}/useradd -r -g %{user_name} -d / -s /sbin/nologin \
   -c "Janus Gateway" %{user_name}
 
-%service_add_pre janus.service
-
-%post
-%service_add_post janus.service
-
-%preun
-%service_del_preun janus.service
-
-%postun
-%service_del_postun janus.service
-
 %files
 %doc README.md
 %license COPYING
@@ -153,5 +142,3 @@ install -D -d -m 0750 %{buildroot}%{home}
 
 %files devel
 %{_includedir}/janus/
-
-%changelog
