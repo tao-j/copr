@@ -1,6 +1,6 @@
 Name: kvmd
 Version: 3.156
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: The main Pi-KVM daemon
 License: GPLv3+
 URL: https://github.com/pikvm/kvmd
@@ -144,10 +144,9 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %{__install} -Dm444 -t %{buildroot}/etc/kvmd/nginx configs/nginx/*.conf
 %{__chmod} 644 %{buildroot}/etc/kvmd/nginx/nginx.conf
 %{__sed} -i -e 's/^#PROD//' %{buildroot}/etc/kvmd/nginx/nginx.conf
-%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*.yaml configs/kvmd/*passwd
-%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd/main.yaml %{SOURCE1}
+%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*.yaml configs/kvmd/*passwd configs/kvmd/web.css
+%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd %{SOURCE1}
 %{__mkdir_p} %{buildroot}%{_sharedstatedir}/kvmd/msd
-# TODO: add web.css
 %check
 %{__python3} -m unittest discover -v
 
@@ -175,6 +174,7 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %config %attr(0600,kvmd-ipmi,kvmd-ipmi) %{_sysconfdir}/kvmd/ipmipasswd
 %config %attr(0600,kvmd-vnc,kvmd-vnc) %{_sysconfdir}/kvmd/vncpasswd
 %config %{_sysconfdir}/kvmd/*.yaml
+%config %{_sysconfdir}/kvmd/*.css
 %{_unitdir}/*.service
 %exclude %{_unitdir}/kvmd-nginx.service
 %{_sysusersdir}/kvmd.conf
