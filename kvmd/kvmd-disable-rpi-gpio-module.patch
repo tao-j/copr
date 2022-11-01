@@ -1,0 +1,31 @@
+diff --git a/kvmd/apps/kvmd/info/__init__.py b/kvmd/apps/kvmd/info/__init__.py
+index 032dbb2d..ebc07bb0 100644
+--- a/kvmd/apps/kvmd/info/__init__.py
++++ b/kvmd/apps/kvmd/info/__init__.py
+@@ -39,7 +39,7 @@ class InfoManager:
+             "auth": AuthInfoSubmanager(config.kvmd.auth.enabled),
+             "meta": MetaInfoSubmanager(config.kvmd.info.meta),
+             "extras": ExtrasInfoSubmanager(config),
+-            "hw": HwInfoSubmanager(**config.kvmd.info.hw._unpack()),
++            # "hw": HwInfoSubmanager(**config.kvmd.info.hw._unpack()),
+             "fan": FanInfoSubmanager(**config.kvmd.info.fan._unpack()),
+         }
+ 
+diff --git a/kvmd/apps/kvmd/server.py b/kvmd/apps/kvmd/server.py
+index c02999e4..e91cdfe5 100644
+--- a/kvmd/apps/kvmd/server.py
++++ b/kvmd/apps/kvmd/server.py
+@@ -165,10 +165,10 @@ class KvmdServer(HttpServer):  # pylint: disable=too-many-arguments,too-many-ins
+                 for sub in sorted(info_manager.get_subs())
+             ],
+             *[
+-                _Component("User-GPIO",    "gpio_state",     user_gpio),
++                # _Component("User-GPIO",    "gpio_state",     user_gpio),
+                 _Component("HID",          "hid_state",      hid),
+-                _Component("ATX",          "atx_state",      atx),
+-                _Component("MSD",          "msd_state",      msd),
++                # _Component("ATX",          "atx_state",      atx),
++                # _Component("MSD",          "msd_state",      msd),
+                 _Component("Streamer",     "streamer_state", streamer),
+             ],
+         ]

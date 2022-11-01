@@ -1,12 +1,14 @@
 Name: kvmd
 Version: 3.156
-Release: 1%{?dist}
+Release: 3%{?dist}
 Summary: The main Pi-KVM daemon
 License: GPLv3+
 URL: https://github.com/pikvm/kvmd
 Source: https://github.com/pikvm/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0: kvmd-otgnet-fix-paths.patch
 Patch1: kvmd-remove-unsupported-type-annotation.patch
+Patch2: kvmd-disable-rpi-gpio-module.patch
+Source1: main.yaml
 BuildArch: noarch
 BuildRequires: python3-devel
 BuildRequires: python3-rpm
@@ -57,6 +59,8 @@ Requires: python3dist(psutil)
 Requires: python3dist(netifaces)
 Requires: python3dist(systemd-python)
 Requires: python3dist(dbus-python)
+Requires: python3dist(dbus-next)
+Requires: python3dist(zstandard)
 Requires: python3dist(pygments)
 Requires: python3dist(pyghmi)
 Requires: python3dist(python-pam)
@@ -101,6 +105,8 @@ BuildArch: noarch
 Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: %{name}-web = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: nginx
+Requires: tesseract
+Requires: tesseract-langpack-eng
 
 %description nginx
 Nginx configuration for Pi-KVM.
@@ -110,12 +116,14 @@ Nginx configuration for Pi-KVM.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 CFLAGS="%{optflags}" %{__python3} setup.py build
 
 %install
 %{__python3} setup.py install -O1 --prefix=%{_prefix} --root %{buildroot}
+%{__install} -Dm755 -t %{buildroot}%{_bindir} scripts/kvmd-{bootconfig,gencert,certbot}
 %{__install} -Dm644 -t %{buildroot}%{_unitdir} configs/os/services/*.service
 %{__rm} -f %{buildroot}%{_unitdir}/kvmd-bootconfig.service
 %{__sed} -i 's|/usr/bin/nginx|/usr/sbin/nginx|' %{buildroot}%{_unitdir}/kvmd-nginx.service
@@ -137,8 +145,9 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %{__chmod} 644 %{buildroot}/etc/kvmd/nginx/nginx.conf
 %{__sed} -i -e 's/^#PROD//' %{buildroot}/etc/kvmd/nginx/nginx.conf
 %{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*.yaml configs/kvmd/*passwd
+%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd/main.yaml %{SOURCE1}
 %{__mkdir_p} %{buildroot}%{_sharedstatedir}/kvmd/msd
-
+# TODO: add web.css
 %check
 %{__python3} -m unittest discover -v
 
