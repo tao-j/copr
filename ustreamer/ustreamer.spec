@@ -1,10 +1,10 @@
 Name: ustreamer
-Version: 5.24
+Version: 5.34
 Release: 1%{?dist}
 Summary: Lightweight and fast MJPG-HTTP streamer
-License: GPLv3+
+License: GPL-3.0-or-later
 URL: https://github.com/pikvm/ustreamer
-Source: https://github.com/pikvm/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires: gcc
 BuildRequires: glibc-devel
 BuildRequires: pkgconfig(libjpeg)
@@ -15,7 +15,7 @@ BuildRequires: pkgconfig(libgpiod)
 BuildRequires: pkgconfig(libsystemd)
 
 %description
-µStreamer is a lightweight and very quick server to stream MJPG video
+ustreamer(µStreamer) is a lightweight and very quick server to stream MJPG video
 from any V4L2 device to the net.
 
 All new browsers have native support of this video format,
@@ -26,12 +26,11 @@ screencast hardware data with the highest resolution and FPS possible.
 
 
 %prep
-%setup -q
+%autosetup
 
 %build
+%set_build_flags
 %make_build \
-    CFLAGS='%{?build_cflags}' \
-    LDFLAGS='%{?build_ldflags}' \
     WITH_GPIO=1 \
     WITH_SYSTEMD=1
 
