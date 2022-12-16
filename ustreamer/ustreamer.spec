@@ -46,7 +46,7 @@ screencast hardware data with the highest resolution and FPS possible.
 %{_mandir}/man1/ustreamer-dump.1*
 
 %changelog
-* Wed Dec 14 Tao Jin <tao-j@outlook.com> - 5.34-1
+* Wed Dec 14 2022 Tao Jin <tao-j@outlook.com> - 5.34-1
 - update to 5.34 and address review comments
 
 * Sun Oct 23 2022 Tao Jin <tao-j@outlook.com> - 5.24-1
