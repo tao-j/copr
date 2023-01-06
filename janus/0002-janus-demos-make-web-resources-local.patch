@@ -1,0 +1,845 @@
+diff --git a/html/admin.html b/html/admin.html
+index 592a4d87..fb0816e6 100644
+--- a/html/admin.html
++++ b/html/admin.html
+@@ -5,9 +5,9 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Admin/Monitor</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
+ <script type="text/javascript" src="admin.js"></script>
+ <script>
+ 	$(function() {
+@@ -18,9 +18,9 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/audiobridgetest.html b/html/audiobridgetest.html
+index bb7a5b63..14d9c887 100644
+--- a/html/audiobridgetest.html
++++ b/html/audiobridgetest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Audio Bridge Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/bootstrap-slider-10.6.2.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="audiobridgetest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.css" type="text/css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootstrap-slider.css" type="text/css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/canvas.html b/html/canvas.html
+index 05ae1517..9f2604a5 100644
+--- a/html/canvas.html
++++ b/html/canvas.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Canvas Capture</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="canvas.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/citeus.html b/html/citeus.html
+index ba766538..60bc7542 100644
+--- a/html/citeus.html
++++ b/html/citeus.html
+@@ -5,8 +5,8 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Cite us!</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
+ <script>
+ 	$(function() {
+ 		$(".navbar-static-top").load("navbar.html", function() {
+@@ -15,7 +15,7 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+ </head>
+ <body>
+diff --git a/html/demos.html b/html/demos.html
+index fc9f1a57..d9d9fb25 100644
+--- a/html/demos.html
++++ b/html/demos.html
+@@ -5,8 +5,8 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Demo Tests</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
+ <script>
+ 	$(function() {
+ 		$(".navbar-static-top").load("navbar.html", function() {
+@@ -16,7 +16,7 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+ </head>
+ <body>
+diff --git a/html/devicetest.html b/html/devicetest.html
+index 6cc092e7..b3044afd 100644
+--- a/html/devicetest.html
++++ b/html/devicetest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Device Selection Test</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="devicetest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/e2etest.html b/html/e2etest.html
+index a7898d73..223b5115 100644
+--- a/html/e2etest.html
++++ b/html/e2etest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): End-to-end Encryption Test</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="e2etest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/echotest.html b/html/echotest.html
+index 65dd1e55..9cb57268 100644
+--- a/html/echotest.html
++++ b/html/echotest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Echo Test</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="echotest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/index.html b/html/index.html
+index fe55c61a..e7617c03 100644
+--- a/html/index.html
++++ b/html/index.html
+@@ -5,8 +5,8 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): About Janus</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
+ <script>
+ 	$(function() {
+ 		$(".navbar-static-top").load("navbar.html", function() {
+@@ -15,7 +15,7 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+ </head>
+ <body>
+diff --git a/html/multiopus.html b/html/multiopus.html
+index 9e9702b2..7932f694 100644
+--- a/html/multiopus.html
++++ b/html/multiopus.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Multichannel Opus (surround)</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="multiopus.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/mvideoroomtest.html b/html/mvideoroomtest.html
+index 7cb3f4ae..923a774d 100644
+--- a/html/mvideoroomtest.html
++++ b/html/mvideoroomtest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Video Room Demo (multistream)</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="mvideoroomtest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/nosiptest.html b/html/nosiptest.html
+index e800c607..417b9301 100644
+--- a/html/nosiptest.html
++++ b/html/nosiptest.html
+@@ -5,12 +5,12 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): NoSIP (SDP/RTP)</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="nosiptest.js"></script>
+@@ -23,9 +23,9 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/recordplaytest.html b/html/recordplaytest.html
+index 3fc0149c..062dde6e 100644
+--- a/html/recordplaytest.html
++++ b/html/recordplaytest.html
+@@ -5,12 +5,12 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Recorder/Playout Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="recordplaytest.js"></script>
+@@ -23,9 +23,9 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/screensharingtest.html b/html/screensharingtest.html
+index 4797a84a..bcf71b74 100644
+--- a/html/screensharingtest.html
++++ b/html/screensharingtest.html
+@@ -5,12 +5,12 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Screen Sharing Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="screensharingtest.js"></script>
+@@ -23,9 +23,9 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/siptest.html b/html/siptest.html
+index 973c6786..92ddcbee 100644
+--- a/html/siptest.html
++++ b/html/siptest.html
+@@ -5,14 +5,14 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): SIP Gateway Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.6.0/js/md5.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/blueimp-md5-2.6.0.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="siptest.js"></script>
+@@ -25,10 +25,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/streamingtest.html b/html/streamingtest.html
+index e0612378..84b9ddaf 100644
+--- a/html/streamingtest.html
++++ b/html/streamingtest.html
+@@ -5,12 +5,12 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Streaming Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="streamingtest.js"></script>
+@@ -23,10 +23,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/support.html b/html/support.html
+index 72f3b31b..e9576545 100644
+--- a/html/support.html
++++ b/html/support.html
+@@ -5,8 +5,8 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Support</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
+ <script>
+ 	$(function() {
+ 		$(".navbar-static-top").load("navbar.html", function() {
+@@ -15,7 +15,7 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+ </head>
+ <body>
+diff --git a/html/textroomtest.html b/html/textroomtest.html
+index 39018784..27948c9c 100644
+--- a/html/textroomtest.html
++++ b/html/textroomtest.html
+@@ -5,12 +5,12 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Text Room</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="textroomtest.js"></script>
+@@ -23,9 +23,9 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/videocalltest.html b/html/videocalltest.html
+index 660b7a00..9864d310 100644
+--- a/html/videocalltest.html
++++ b/html/videocalltest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Video Call Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="videocalltest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/videoroomtest.html b/html/videoroomtest.html
+index e34f14dc..ebfacc0d 100644
+--- a/html/videoroomtest.html
++++ b/html/videoroomtest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Video Room Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="videoroomtest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/virtualbg.html b/html/virtualbg.html
+index 4683c84d..16d5d164 100644
+--- a/html/virtualbg.html
++++ b/html/virtualbg.html
+@@ -5,14 +5,14 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Virtual Background</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js" crossorigin="anonymous"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
++<script src="js/selfie_segmentation-0.1.1671057942.js"</script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="virtualbg.js"></script>
+@@ -25,10 +25,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/voicemailtest.html b/html/voicemailtest.html
+index 4a9b8b04..123bd5bb 100644
+--- a/html/voicemailtest.html
++++ b/html/voicemailtest.html
+@@ -5,12 +5,12 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Voice Mail Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="voicemailtest.js"></script>
+@@ -23,7 +23,7 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+ </head>
+ <body>
+diff --git a/html/vp9svctest.html b/html/vp9svctest.html
+index 9ba5425d..ae64ab4e 100644
+--- a/html/vp9svctest.html
++++ b/html/vp9svctest.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): VP9-SVC Video Room Demo</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="vp9svctest.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
+diff --git a/html/webaudio.html b/html/webaudio.html
+index c833a725..36d44cd6 100644
+--- a/html/webaudio.html
++++ b/html/webaudio.html
+@@ -5,13 +5,13 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Janus WebRTC Server (multistream): Web Audio Processing</title>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.0/adapter.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
++<script type="text/javascript" src="js/webrtc-adapter-8.2.0.min.js" ></script>
++<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
++<script type="text/javascript" src="js/jquery.blockUI-2.70.min.js" ></script>
++<script type="text/javascript" src="js/bootstrap-3.4.1.min.js"></script>
++<script type="text/javascript" src="js/bootbox-5.4.0.min.js"></script>
++<script type="text/javascript" src="js/spin-2.3.2.min.js"></script>
++<script type="text/javascript" src="js/toastr-2.1.4.min.js"></script>
+ <script type="text/javascript" src="settings.js" ></script>
+ <script type="text/javascript" src="janus.js" ></script>
+ <script type="text/javascript" src="webaudio.js"></script>
+@@ -24,10 +24,10 @@
+ 		$(".footer").load("footer.html");
+ 	});
+ </script>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/bootswatch-cerulean-3.4.0.min.css" type="text/css"/>
+ <link rel="stylesheet" href="css/demo.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
++<link rel="stylesheet" href="/usr/share/font-awesome-web/css/font-awesome.min.css" type="text/css"/>
++<link rel="stylesheet" href="css/toastr-2.1.4.min.css"/>
+ </head>
+ <body>
+ 
