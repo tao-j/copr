@@ -8,7 +8,9 @@ logging: !include logging.yaml
 
 otgnet:
     iface:
-        ip_cmd: /usr/sbin/ip
+        ip_cmd: /sbin/ip
+    firewall:
+        pre_stop_cmd: /bin/systemctl
 
 kvmd:
     auth: !include auth.yaml
@@ -16,7 +18,8 @@ kvmd:
     hid:
         type: serial
         device: /dev/ttyACM0
-        reset: -1
+        reset_pin: 2
+        gpio_device_path: /dev/gpiochip2
 
     ocr:
         tessdata: /usr/share/tesseract/tessdata
@@ -62,6 +65,7 @@ kvmd:
             - "--no-log-colors"
             - "--sink=kvmd::ustreamer::jpeg"
             - "--sink-mode=0660"
+            - "--resolution=1920x1080"
 
 
 vnc:

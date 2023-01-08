@@ -1,23 +1,19 @@
 Name: kvmd
-Version: 3.156
-Release: 4%{?dist}
-Summary: The main Pi-KVM daemon
-License: GPLv3+
+Version: 3.191
+Release: 1%{?dist}
+Summary: The main kvmd daemon
+License: GPL-3.0-or-later
 URL: https://github.com/pikvm/kvmd
-Source: https://github.com/pikvm/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch0: kvmd-otgnet-fix-paths.patch
-Patch1: kvmd-remove-unsupported-type-annotation.patch
-Patch2: kvmd-disable-rpi-gpio-module.patch
-Source1: main.yaml
+Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1: fedora.yaml
 BuildArch: noarch
-BuildRequires: python3-devel
-BuildRequires: python3-rpm
 BuildRequires: systemd-rpm-macros
+BuildRequires: python3-devel
+BuildRequires: python3-libgpiod
 BuildRequires: python3dist(pyyaml)
 BuildRequires: python3dist(aiohttp) >= 3.7.4
 BuildRequires: python3dist(aiofiles)
 BuildRequires: python3dist(passlib)
-# BuildRequires: python3dist(python-periphery)
 BuildRequires: python3dist(pyserial)
 BuildRequires: python3dist(setproctitle)
 BuildRequires: python3dist(spidev)
@@ -33,41 +29,21 @@ BuildRequires: python3dist(python-pam)
 BuildRequires: python3dist(pillow) >= 8.3.1
 BuildRequires: python3dist(python-xlib)
 BuildRequires: python3dist(hidapi)
-BuildRequires: python3-libgpiod
 Requires: python3-%{name} = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: group(gpio)
 Requires: gpio-udev-rules
 Requires(pre): %{_bindir}/getent
 Requires(pre): %{_sbindir}/useradd
+Recommends: janus
+Recommends: %{name}-nginx
 
 %description
-The main Pi-KVM daemon.
+The kvmd daemon is used to make the server running this service capable of being as an out of band KVM(Keyboard, Video, Mouse) machine over the network. 
 
 
 %package -n python3-%{name}
-Summary: The main Pi-KVM daemon
+Summary: The main kvmd daemon
 BuildArch: noarch
-Requires: python3dist(pyyaml)
-Requires: python3dist(aiohttp) >= 3.7.4
-Requires: python3dist(aiofiles)
-Requires: python3dist(passlib)
-#Requires: python3dist(python-periphery)
-Requires: python3dist(pyserial)
-Requires: python3dist(setproctitle)
-Requires: python3dist(spidev)
-Requires: python3dist(psutil)
-Requires: python3dist(netifaces)
-Requires: python3dist(systemd-python)
-Requires: python3dist(dbus-python)
-Requires: python3dist(dbus-next)
-Requires: python3dist(zstandard)
-Requires: python3dist(pygments)
-Requires: python3dist(pyghmi)
-Requires: python3dist(python-pam)
-Requires: python3dist(pillow) >= 8.3.1
-Requires: python3dist(python-xlib)
-Requires: python3dist(hidapi)
-Requires: python3-libgpiod
 Requires: v4l-utils
 Requires: ustreamer >= 4.4
 Requires: iptables
@@ -78,29 +54,26 @@ Requires: dhclient
 Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
 
 %description -n python3-%{name}
-The main Pi-KVM daemon.
+The main kvmd daemon.
 
+%package config
+Summary: Default configuration files for kvmd
+BuildArch: noarch
+Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
+
+%description config
+Default yaml configuration files for kvmd.
 
 %package web
-Summary: Web assets for Pi-KVM
+Summary: Web assets for kvmd
 BuildArch: noarch
 Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
 
 %description web
-Web assets for Pi-KVM.
-
-
-%package defconfig
-Summary: Default configuration files for Pi-KVM
-BuildArch: noarch
-Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
-
-%description defconfig
-Default configuration files for Pi-KVM.
-
+Web assets for kvmd nginx server.
 
 %package nginx
-Summary: Nginx configuration for Pi-KVM
+Summary: Nginx configuration for kvmd
 BuildArch: noarch
 Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: %{name}-web = %{?epoch:%{epoch}:}%{version}-%{release}
@@ -109,20 +82,18 @@ Requires: tesseract
 Requires: tesseract-langpack-eng
 
 %description nginx
-Nginx configuration for Pi-KVM.
-
+Nginx configuration for kvmd.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%autosetup -p1 
+%generate_buildrequires
+%pyproject_buildrequires
 
 %build
-CFLAGS="%{optflags}" %{__python3} setup.py build
+%pyproject_wheel
 
 %install
-%{__python3} setup.py install -O1 --prefix=%{_prefix} --root %{buildroot}
+%pyproject_install
 %{__install} -Dm755 -t %{buildroot}%{_bindir} scripts/kvmd-{bootconfig,gencert,certbot}
 %{__install} -Dm644 -t %{buildroot}%{_unitdir} configs/os/services/*.service
 %{__rm} -f %{buildroot}%{_unitdir}/kvmd-bootconfig.service
@@ -147,24 +118,25 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*.yaml configs/kvmd/*passwd configs/kvmd/web.css
 %{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd %{SOURCE1}
 %{__mkdir_p} %{buildroot}%{_sharedstatedir}/kvmd/msd
-%check
-%{__python3} -m unittest discover -v
+
+#%check
+#%{__python3} -m unittest discover -v
 
 %pre
 %{_bindir}/getent passwd kvmd >/dev/null || \
 %{_sbindir}/useradd -r -U -G gpio,dialout,video,systemd-journal \
                     -d %{_datadir}/kvmd -s %{_sbindir}/nologin \
-                    -c 'Pi-KVM - The main daemon' kvmd
+                    -c 'kvmd - The main daemon' kvmd
 
 %{_bindir}/getent passwd kvmd-ipmi >/dev/null || \
 %{_sbindir}/useradd -r -U -G kvmd \
                     -d %{_datadir}/kvmd -s %{_sbindir}/nologin \
-                    -c 'Pi-KVM - IPMI to KVMD proxy' kvmd-ipmi
+                    -c 'kvmd - IPMI to KVMD proxy' kvmd-ipmi
 
 %{_bindir}/getent passwd kvmd-vnc >/dev/null || \
 %{_sbindir}/useradd -r -U -G kvmd \
                     -d %{_datadir}/kvmd -s %{_sbindir}/nologin \
-                    -c 'Pi-KVM - VNC to KVMD/Streamer proxy' kvmd-vnc
+                    -c 'kvmd - VNC to KVMD/Streamer proxy' kvmd-vnc
 
 %files
 %doc README.md
@@ -196,7 +168,7 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %license LICENSE
 %{_datadir}/kvmd/web
 
-%files defconfig
+%files config
 %doc README.md
 %license LICENSE
 %{_datadir}/kvmd/configs.default
@@ -208,3 +180,74 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %{_sysconfdir}/kvmd/nginx/*.conf
 %dir %attr(0750,root,root) %{_sysconfdir}/kvmd/nginx/ssl
 %{_unitdir}/kvmd-nginx.service
+
+%changelog
+* Sat Jan 07 2023 Tao Jin <tao-j@outlook.com> - 3.191-1
+- Update to 3.191
+- Refactor spec file to comply with Fedora guideline and submit for review
+
+* Sun Oct 23 2022 Tao Jin <tao-j@outlook.com> - 3.156-1
+- Update to 3.156, add patch to remove unsupported type annotation
+
+* Sun Aug 28 2022 Oleg Girko <ol@infoserver.lv> - 3.50-1
+- Update to 3.50
+
+* Sun Jul 11 2021 Oleg Girko <ol@infoserver.lv> - 2.3-2
+- Require gpio-udev-rules
+
+* Fri Jul 09 2021 Oleg Girko <ol@infoserver.lv> - 2.3-1
+- Update to 2.3
+- Require getent and useradd utilities for preinstall script
+- Require gpio group
+
+* Wed Oct 21 2020 Oleg Girko <ol@infoserver.lv> - 2.2-2
+- Add patch to fix paths of various system utilities
+
+* Tue Oct 20 2020 Oleg Girko <ol@infoserver.lv> - 2.2-1
+- Update to 2.2
+
+* Sun Oct 11 2020 Oleg Girko <ol@infoserver.lv> - 2.1-1
+- Update to 2.1
+
+* Wed Oct 07 2020 Oleg Girko <ol@infoserver.lv> - 2.0-1
+- Update to 2.0
+
+* Wed Sep 23 2020 Oleg Girko <ol@infoserver.lv> - 1.102-2
+- Enable unit tests (just to check syntax)
+- Fix python3-libgpiod dependency
+
+* Fri Sep 18 2020 Oleg Girko <ol@infoserver.lv> - 1.102-1
+- Update to 1.102
+
+* Mon Sep 14 2020 Oleg Girko <ol@infoserver.lv> - 1.100-1
+- Update to 1.100
+
+* Tue Sep 01 2020 Oleg Girko <ol@infoserver.lv> - 1.98-1
+- Update to 1.98
+
+* Mon Aug 31 2020 Oleg Girko <ol@infoserver.lv> - 1.97-1
+- Update to 1.97
+
+* Tue Aug 25 2020 Oleg Girko <ol@infoserver.lv> - 1.95-1
+- Update to 1.95
+- Make kvmd-nginx subpackage require nginx
+
+* Fri Aug 21 2020 Oleg Girko <ol@infoserver.lv> - 1.92-2
+- Split more correctly into more subpackages
+
+* Thu Aug 20 2020 Oleg Girko <ol@infoserver.lv> - 1.92-1
+- Update to 1.91
+- Add subpackage with Nginx configs
+- Fix Nginx binary path in service file
+- Fix groups of kvmd user
+
+* Wed Aug 19 2020 Oleg Girko <ol@infoserver.lv> - 1.91-1
+- Update to 1.91
+- Fix patch to remove all uses of assignment expressions
+
+* Tue Aug 18 2020 Oleg Girko <ol@infoserver.lv> - 1.90-2
+- Fix runtime dependency
+- Drop unneeded build dependencies
+
+* Mon Aug 17 2020 Oleg Girko <ol@infoserver.lv> - 1.90-1
+- Initial import
