@@ -13,8 +13,8 @@ BuildRequires: pkgconfig(libevent_pthreads)
 BuildRequires: pkgconfig(libbsd)
 BuildRequires: pkgconfig(libgpiod)
 BuildRequires: pkgconfig(libsystemd)
-BuildRequires: python3-devel
-BuildRequires: python3-setuptools
+BuildRequires: pkgconfig(python)
+BuildRequires: python3dist(setuptools)
 
 %description
 ustreamer(µStreamer) is a lightweight and very quick server to stream MJPG video
