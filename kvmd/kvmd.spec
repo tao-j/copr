@@ -1,11 +1,12 @@
 Name: kvmd
 Version: 3.191
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The main kvmd daemon
 License: GPL-3.0-or-later
 URL: https://github.com/pikvm/kvmd
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1: fedora.yaml
+Source2: kvmd-systemd-override.conf
 BuildArch: noarch
 BuildRequires: systemd-rpm-macros
 BuildRequires: python3-devel
@@ -29,17 +30,17 @@ BuildRequires: python3dist(python-pam)
 BuildRequires: python3dist(pillow) >= 8.3.1
 BuildRequires: python3dist(python-xlib)
 BuildRequires: python3dist(hidapi)
+#BuildRequires: python3dist(ustreamer)
 Requires: python3-%{name} = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: group(gpio)
-Requires: gpio-udev-rules
 Requires(pre): %{_bindir}/getent
 Requires(pre): %{_sbindir}/useradd
 Recommends: janus
 Recommends: %{name}-nginx
+Recommends: %{name}-config
 
 %description
 The kvmd daemon is used to make the server running this service capable of being as an out of band KVM(Keyboard, Video, Mouse) machine over the network. 
-
 
 %package -n python3-%{name}
 Summary: The main kvmd daemon
@@ -60,15 +61,19 @@ The main kvmd daemon.
 Summary: Default configuration files for kvmd
 BuildArch: noarch
 Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
-
 %description config
 Default yaml configuration files for kvmd.
+
+%package config-fedora
+Summary: Default configuration files for kvmd
+BuildArch: noarch
+%description config-fedora
+Default yaml configuration files for kvmd. Fedora generic sever support
 
 %package web
 Summary: Web assets for kvmd
 BuildArch: noarch
 Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
-
 %description web
 Web assets for kvmd nginx server.
 
@@ -80,7 +85,6 @@ Requires: %{name}-web = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: nginx
 Requires: tesseract
 Requires: tesseract-langpack-eng
-
 %description nginx
 Nginx configuration for kvmd.
 
@@ -110,14 +114,23 @@ find %{buildroot}%{_datadir}/kvmd/web -name '*.pug' -exec rm -f '{}' \;
 %{__mkdir_p} %{buildroot}%{_datadir}/kvmd/configs.default
 %{__cp} -r configs/* %{buildroot}%{_datadir}/kvmd/configs.default
 find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
-%{__mkdir_p} %{buildroot}/etc/kvmd/nginx/ssl
-%{__chmod} 750 %{buildroot}/etc/kvmd/nginx/ssl
-%{__install} -Dm444 -t %{buildroot}/etc/kvmd/nginx configs/nginx/*.conf
-%{__chmod} 644 %{buildroot}/etc/kvmd/nginx/nginx.conf
-%{__sed} -i -e 's/^#PROD//' %{buildroot}/etc/kvmd/nginx/nginx.conf
-%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*.yaml configs/kvmd/*passwd configs/kvmd/web.css
-%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd %{SOURCE1}
-%{__mkdir_p} %{buildroot}%{_sharedstatedir}/kvmd/msd
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/{vnc,nginx}/ssl
+%{__chmod} 750 %{buildroot}%{_sysconfdir}/kvmd/{vnc,nginx}/ssl
+%{__install} -Dm444 -t %{buildroot}%{_sysconfdir}/kvmd/nginx configs/nginx/*.conf
+%{__chmod} 644 %{buildroot}%{_sysconfdir}/kvmd/nginx/{nginx,redirect-to-https,ssl,listen-http{,s}}.conf
+%{__sed} -i -e 's/^#PROD//' %{buildroot}%{_sysconfdir}/kvmd/nginx/nginx.conf
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/janus
+%{__chmod} 750 %{buildroot}%{_sysconfdir}/kvmd/janus
+%{__install} -Dm444 -t %{buildroot}%{_sysconfdir}/kvmd/janus configs/janus/*.jcfg
+%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*.yaml configs/kvmd/web.css
+%{__install} -Dm600 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*passwd
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/override.d
+%{__mkdir_p} %{buildroot}%{_sharedstatedir}/kvmd/{msd,pst}
+%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd/main.yaml %{SOURCE1}
+%{__cp} -r testenv/fakes %{buildroot}%{_datadir}/kvmd
+%{__install} -Dm644 -t ${buildroot}{_bindir}/kvmd-fake-vcgencmd testenv/fakes/vcgencmd
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/systemd/system/kvmd.service.d
+%{__cp} %{SOURCE2} %{buildroot}%{_sysconfdir}/systemd/system/kvmd.service.d
 
 #%check
 #%{__python3} -m unittest discover -v
@@ -138,6 +151,10 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
                     -d %{_datadir}/kvmd -s %{_sbindir}/nologin \
                     -c 'kvmd - VNC to KVMD/Streamer proxy' kvmd-vnc
 
+%post
+%{_bindir}/kvmd-gencert --do-the-thing
+%{_bindir}/kvmd-gencert --do-the-thing --vnc
+
 %files
 %doc README.md
 %license LICENSE
@@ -147,6 +164,7 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %config %attr(0600,kvmd-vnc,kvmd-vnc) %{_sysconfdir}/kvmd/vncpasswd
 %config %{_sysconfdir}/kvmd/*.yaml
 %config %{_sysconfdir}/kvmd/*.css
+%config %{_sysconfdir}/kvmd/janus/*.jcfg
 %{_unitdir}/*.service
 %exclude %{_unitdir}/kvmd-nginx.service
 %{_sysusersdir}/kvmd.conf
@@ -161,7 +179,7 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %doc README.md
 %license LICENSE
 %{_bindir}/kvmd*
-%{python3_sitelib}/*
+%{python3_sitelib}/kvmd*
 
 %files web
 %doc README.md
@@ -173,6 +191,12 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %license LICENSE
 %{_datadir}/kvmd/configs.default
 
+%files config-fedora
+%doc README.md
+%license LICENSE
+%{_sysconfdir}/kvmd/main.yaml
+%{_sysconfdir}/systemd/system/kvmd.service.d/*
+
 %files nginx
 %doc README.md
 %license LICENSE
@@ -182,6 +206,11 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %{_unitdir}/kvmd-nginx.service
 
 %changelog
+* Sat Jan 07 2023 Tao Jin <tao-j@outlook.com> - 3.191-2
+- Add fake script to be used in generic server
+- Multiple clean-ups
+
+
 * Sat Jan 07 2023 Tao Jin <tao-j@outlook.com> - 3.191-1
 - Update to 3.191
 - Refactor spec file to comply with Fedora guideline and submit for review
