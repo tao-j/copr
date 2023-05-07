@@ -1,7 +1,7 @@
 Name: kvmd
 Version: 3.191
-Release: 2%{?dist}
-Summary: The main kvmd daemon
+Release: 4%{?dist}
+Summary: A KVM(Keyboard, Video, Mouse) daemon
 License: GPL-3.0-or-later
 URL: https://github.com/pikvm/kvmd
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -30,12 +30,12 @@ BuildRequires: python3dist(python-pam)
 BuildRequires: python3dist(pillow) >= 8.3.1
 BuildRequires: python3dist(python-xlib)
 BuildRequires: python3dist(hidapi)
-#BuildRequires: python3dist(ustreamer)
+BuildRequires: python3dist(ustreamer)
 Requires: python3-%{name} = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: group(gpio)
 Requires(pre): %{_bindir}/getent
 Requires(pre): %{_sbindir}/useradd
-Recommends: janus
+Requires: janus
 Recommends: %{name}-nginx
 Recommends: %{name}-config
 
@@ -132,8 +132,8 @@ find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/systemd/system/kvmd.service.d
 %{__cp} %{SOURCE2} %{buildroot}%{_sysconfdir}/systemd/system/kvmd.service.d
 
-#%check
-#%{__python3} -m unittest discover -v
+%check
+%{__python3} -m unittest discover -v
 
 %pre
 %{_bindir}/getent passwd kvmd >/dev/null || \
