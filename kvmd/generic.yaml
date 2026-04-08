@@ -13,7 +13,7 @@ otgnet:
         pre_stop_cmd: /bin/systemctl
 
 hw:
-    vcgencmd_cmd: "/usr/bin/kvmd-fake-vcgencmd"
+    vcgencmd_cmd: "/usr/bin/true
 
 kvmd:
     auth: !include auth.yaml

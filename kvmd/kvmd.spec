@@ -1,282 +1,245 @@
-Name: kvmd
-Version: 3.191
-Release: 4%{?dist}
-Summary: A KVM(Keyboard, Video, Mouse) daemon
+Name:           kvmd
+Version:        4.163
+Release:        %autorelease
+Summary:        The main PiKVM daemon
 License: GPL-3.0-or-later
-URL: https://github.com/pikvm/kvmd
-Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Source1: fedora.yaml
-Source2: kvmd-systemd-override.conf
-BuildArch: noarch
-BuildRequires: systemd-rpm-macros
-BuildRequires: python3-devel
-BuildRequires: python3-libgpiod
-BuildRequires: python3dist(pyyaml)
-BuildRequires: python3dist(aiohttp) >= 3.7.4
-BuildRequires: python3dist(aiofiles)
-BuildRequires: python3dist(passlib)
-BuildRequires: python3dist(pyserial)
-BuildRequires: python3dist(setproctitle)
-BuildRequires: python3dist(spidev)
-BuildRequires: python3dist(psutil)
-BuildRequires: python3dist(netifaces)
-BuildRequires: python3dist(systemd-python)
-BuildRequires: python3dist(dbus-python)
-BuildRequires: python3dist(dbus-next)
-BuildRequires: python3dist(zstandard)
-BuildRequires: python3dist(pygments)
-BuildRequires: python3dist(pyghmi)
-BuildRequires: python3dist(python-pam)
-BuildRequires: python3dist(pillow) >= 8.3.1
-BuildRequires: python3dist(python-xlib)
-BuildRequires: python3dist(hidapi)
-BuildRequires: python3dist(ustreamer)
-Requires: python3-%{name} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires: group(gpio)
-Requires(pre): %{_bindir}/getent
-Requires(pre): %{_sbindir}/useradd
-Requires: janus
-Recommends: %{name}-nginx
-Recommends: %{name}-config
+URL:            https://github.com/pikvm/kvmd
+Source0:        %{url}/archive/v%{version}.tar.gz
+Source1:        generic.yaml
+
+BuildArch:      noarch
+BuildRequires:  python3-devel
+BuildRequires:  python3-rpm
+BuildRequires:  systemd-rpm-macros
+BuildRequires:  python3dist(pyyaml)
+BuildRequires:  python3dist(aiohttp)
+BuildRequires:  python3dist(aiofiles)
+BuildRequires:  python3dist(async-lru)
+BuildRequires:  python3dist(passlib)
+BuildRequires:  python3dist(pyotp)
+BuildRequires:  python3dist(qrcode)
+BuildRequires:  python3dist(pyserial)
+BuildRequires:  python3dist(pyserial-asyncio)
+BuildRequires:  python3dist(setproctitle)
+BuildRequires:  python3dist(spidev)
+BuildRequires:  python3dist(psutil)
+BuildRequires:  python3dist(netifaces)
+BuildRequires:  python3dist(systemd-python)
+BuildRequires:  python3dist(dbus-python)
+BuildRequires:  python3dist(dbus-next)
+BuildRequires:  python3dist(pygments)
+BuildRequires:  python3dist(pyghmi)
+BuildRequires:  python3dist(python-pam)
+BuildRequires:  python3dist(pillow)
+BuildRequires:  python3dist(python-xlib)
+BuildRequires:  python3dist(xkbcommon)
+BuildRequires:  python3dist(hidapi)
+BuildRequires:  python3dist(six)
+BuildRequires:  python3dist(pyrad)
+BuildRequires:  python3dist(python-ldap)
+BuildRequires:  python3dist(zstandard)
+BuildRequires:  python3dist(mako)
+BuildRequires:  python3dist(pyusb)
+BuildRequires:  python3dist(pyudev)
+BuildRequires:  python3dist(gpiod) >= 2
+BuildRequires:  python3dist(ustreamer)
+Requires:       group(gpio)
+%{?sysusers_requires_compat}
+Requires(pre):  %{_bindir}/getent
+Requires(pre):  %{_sbindir}/useradd
+
 
 %description
-The kvmd daemon is used to make the server running this service capable of being as an out of band KVM(Keyboard, Video, Mouse) machine over the network. 
+The main PiKVM daemon, packaged for generic generic devices and/or SBCs.
 
-%package -n python3-%{name}
-Summary: The main kvmd daemon
-BuildArch: noarch
-Requires: v4l-utils
-Requires: ustreamer >= 4.4
-Requires: iptables
-Requires: iproute
-Requires: dnsmasq
-Requires: ipmitool
-Requires: dhclient
-Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:       python3dist(pyyaml)
+Requires:       python3dist(aiohttp)
+Requires:       python3dist(aiofiles)
+Requires:       python3dist(async-lru)
+Requires:       python3dist(passlib)
+Requires:       python3dist(pyotp)
+Requires:       python3dist(qrcode)
+Requires:       python3dist(python-periphery)
+Requires:       python3dist(pyserial)
+Requires:       python3dist(pyserial-asyncio)
+Requires:       python3dist(setproctitle)
+Requires:       python3dist(spidev)
+Requires:       python3dist(psutil)
+Requires:       python3dist(netifaces)
+Requires:       python3dist(systemd-python)
+Requires:       python3dist(dbus-python)
+Requires:       python3dist(dbus-next)
+Requires:       python3dist(pygments)
+Requires:       python3dist(pyghmi)
+Requires:       python3dist(python-pam)
+Requires:       python3dist(pillow)
+Requires:       python3dist(python-xlib)
+Requires:       python3dist(xkbcommon)
+Requires:       python3dist(hidapi)
+Requires:       python3dist(six)
+Requires:       python3dist(pyrad)
+Requires:       python3dist(python-ldap)
+Requires:       python3dist(zstandard)
+Requires:       python3dist(mako)
+Requires:       python3dist(luma-oled)
+Requires:       python3dist(pyusb)
+Requires:       python3dist(pyudev)
+Requires:       python3dist(gpiod) >= 2
+Requires:       python3dist(ustreamer)
 
-%description -n python3-%{name}
-The main kvmd daemon.
+Requires:       v4l-utils
+Requires:       iptables
+Requires:       iproute
+Requires:       dnsmasq
+Requires:       ipmitool
+Requires:       certbot
+Requires:       dhclient
+Requires:       nginx >= 1.25.1
+Requires:       openssl
+Requires:       sudo
 
-%package config
-Summary: Default configuration files for kvmd
-BuildArch: noarch
-Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
-%description config
-Default yaml configuration files for kvmd.
+Recommends:     tesseract
+Recommends:     tesseract-langpack-eng
 
-%package config-fedora
-Summary: Default configuration files for kvmd
-BuildArch: noarch
-%description config-fedora
-Default yaml configuration files for kvmd. Fedora generic sever support
 
-%package web
-Summary: Web assets for kvmd
-BuildArch: noarch
-Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
-%description web
-Web assets for kvmd nginx server.
-
-%package nginx
-Summary: Nginx configuration for kvmd
-BuildArch: noarch
-Requires: %{name} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires: %{name}-web = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires: nginx
-Requires: tesseract
-Requires: tesseract-langpack-eng
-%description nginx
-Nginx configuration for kvmd.
 
 %prep
 %autosetup -p1 
 %generate_buildrequires
 %pyproject_buildrequires
 
+
+# Patch sysusers to remove arch specific uucp in favor of dialout, and add video
+%{__sed} -i \
+    -e 's/^m kvmd uucp$/m kvmd dialout/' \
+    -e '/^m kvmd dialout$/a m kvmd video' \
+    configs/os/sysusers.conf
+
 %build
 %pyproject_wheel
 
 %install
 %pyproject_install
-%{__install} -Dm755 -t %{buildroot}%{_bindir} scripts/kvmd-{bootconfig,gencert,certbot}
-%{__install} -Dm644 -t %{buildroot}%{_unitdir} configs/os/services/*.service
-%{__rm} -f %{buildroot}%{_unitdir}/kvmd-bootconfig.service
-%{__sed} -i 's|/usr/bin/nginx|/usr/sbin/nginx|' %{buildroot}%{_unitdir}/kvmd-nginx.service
-%{__install} -DTm644 configs/os/sysusers.conf %{buildroot}%{_sysusersdir}/kvmd.conf
-%{__sed} -i \
-    -e 's/^m kvmd uucp$/m kvmd dialout/' \
-    -e '/^m kvmd dialout$/a m kvmd video' \
-    %{buildroot}%{_sysusersdir}/kvmd.conf
-%{__install} -DTm644 configs/os/tmpfiles.conf %{buildroot}%{_tmpfilesdir}/kvmd.conf
-%{__mkdir_p} %{buildroot}%{_datadir}/kvmd
-%{__cp} -r hid web extras contrib/keymaps %{buildroot}%{_datadir}/kvmd
-find %{buildroot}%{_datadir}/kvmd/web -name '*.pug' -exec rm -f '{}' \;
-%{__mkdir_p} %{buildroot}%{_datadir}/kvmd/configs.default
-%{__cp} -r configs/* %{buildroot}%{_datadir}/kvmd/configs.default
-find %{buildroot}%{_datadir}/kvmd -name .gitignore -delete
-%{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/{vnc,nginx}/ssl
-%{__chmod} 750 %{buildroot}%{_sysconfdir}/kvmd/{vnc,nginx}/ssl
-%{__install} -Dm444 -t %{buildroot}%{_sysconfdir}/kvmd/nginx configs/nginx/*.conf
-%{__chmod} 644 %{buildroot}%{_sysconfdir}/kvmd/nginx/{nginx,redirect-to-https,ssl,listen-http{,s}}.conf
-%{__sed} -i -e 's/^#PROD//' %{buildroot}%{_sysconfdir}/kvmd/nginx/nginx.conf
-%{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/janus
-%{__chmod} 750 %{buildroot}%{_sysconfdir}/kvmd/janus
-%{__install} -Dm444 -t %{buildroot}%{_sysconfdir}/kvmd/janus configs/janus/*.jcfg
-%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*.yaml configs/kvmd/web.css
-%{__install} -Dm600 -t %{buildroot}%{_sysconfdir}/kvmd configs/kvmd/*passwd
-%{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/override.d
-%{__mkdir_p} %{buildroot}%{_sharedstatedir}/kvmd/{msd,pst}
-%{__install} -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd/main.yaml %{SOURCE1}
-%{__cp} -r testenv/fakes %{buildroot}%{_datadir}/kvmd
-%{__install} -Dm644 -t ${buildroot}{_bindir}/kvmd-fake-vcgencmd testenv/fakes/vcgencmd
-%{__mkdir_p} %{buildroot}%{_sysconfdir}/systemd/system/kvmd.service.d
-%{__cp} %{SOURCE2} %{buildroot}%{_sysconfdir}/systemd/system/kvmd.service.d
 
-%check
-%{__python3} -m unittest discover -v
+install -Dm755 -t %{buildroot}%{_bindir} scripts/kvmd-{bootconfig,gencert,certbot}
+install -dm755 %{buildroot}%{_unitdir}
+cp -rd configs/os/services/* %{buildroot}%{_unitdir}/
+
+install -DTm644 configs/os/sysusers.conf %{buildroot}%{_sysusersdir}/kvmd.conf
+
+install -DTm644 configs/os/tmpfiles.conf %{buildroot}%{_tmpfilesdir}/kvmd.conf
+
+# Patch tmpfiles.d to securely bootstrap Nginx volatile directories across reboots
+cat << 'EOF' >> %{buildroot}%{_tmpfilesdir}/kvmd.conf
+d /tmp/kvmd-nginx 0755 kvmd-nginx kvmd-nginx -
+d /tmp/kvmd-nginx/client_body_temp 0755 kvmd kvmd -
+EOF
+
+mkdir -p %{buildroot}%{_datadir}/kvmd
+cp -r switch hid web extras contrib/keymaps %{buildroot}%{_datadir}/kvmd
+find %{buildroot}%{_datadir}/kvmd/web -name '*.pug' -delete
+
+cfg_default=%{buildroot}%{_datadir}/kvmd/configs.default
+mkdir -p $cfg_default
+cp -r configs/* $cfg_default
+
+find %{buildroot} -name '.gitignore' -delete
+find $cfg_default -type f -exec chmod 444 '{}' \;
+chmod 400 $cfg_default/kvmd/*passwd
+chmod 400 $cfg_default/kvmd/*.secret
+chmod 750 $cfg_default/os/sudoers
+chmod 400 $cfg_default/os/sudoers/*
+
+mkdir -p %{buildroot}%{_sysconfdir}/kvmd/{nginx,vnc}/ssl
+chmod 755 %{buildroot}%{_sysconfdir}/kvmd/{nginx,vnc}/ssl
+install -Dm444 -t %{buildroot}%{_sysconfdir}/kvmd/nginx $cfg_default/nginx/*.conf*
+chmod 644 %{buildroot}%{_sysconfdir}/kvmd/nginx/{nginx,ssl}.conf*
+
+mkdir -p %{buildroot}%{_sysconfdir}/kvmd/janus
+chmod 755 %{buildroot}%{_sysconfdir}/kvmd/janus
+install -Dm444 -t %{buildroot}%{_sysconfdir}/kvmd/janus $cfg_default/janus/*.jcfg
+
+install -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd $cfg_default/kvmd/*.yaml
+install -Dm600 -t %{buildroot}%{_sysconfdir}/kvmd $cfg_default/kvmd/*passwd
+install -Dm600 -t %{buildroot}%{_sysconfdir}/kvmd $cfg_default/kvmd/*.secret
+install -Dm644 -t %{buildroot}%{_sysconfdir}/kvmd $cfg_default/kvmd/web.css
+mkdir -p %{buildroot}%{_sysconfdir}/kvmd/override.d
+
+mkdir -p %{buildroot}%{_sharedstatedir}/kvmd/{msd,pst}
+chmod 1775 %{buildroot}%{_sharedstatedir}/kvmd/pst
+
+# Add specific Generic Platform overwrites from sources
+install -Dm644 -T %{SOURCE1} %{buildroot}%{_sysconfdir}/kvmd/main.yaml
+
+# Generate custom udev rule matching the missing gpio-udev package dependency
+mkdir -p %{buildroot}%{_udevrulesdir}
+echo 'SUBSYSTEM=="gpio", KERNEL=="gpiochip*", GROUP="gpio", MODE="0660"' > %{buildroot}%{_udevrulesdir}/99-kvmd-generic-gpio.rules
 
 %pre
-%{_bindir}/getent passwd kvmd >/dev/null || \
-%{_sbindir}/useradd -r -U -G gpio,dialout,video,systemd-journal \
-                    -d %{_datadir}/kvmd -s %{_sbindir}/nologin \
-                    -c 'kvmd - The main daemon' kvmd
-
-%{_bindir}/getent passwd kvmd-ipmi >/dev/null || \
-%{_sbindir}/useradd -r -U -G kvmd \
-                    -d %{_datadir}/kvmd -s %{_sbindir}/nologin \
-                    -c 'kvmd - IPMI to KVMD proxy' kvmd-ipmi
-
-%{_bindir}/getent passwd kvmd-vnc >/dev/null || \
-%{_sbindir}/useradd -r -U -G kvmd \
-                    -d %{_datadir}/kvmd -s %{_sbindir}/nologin \
-                    -c 'kvmd - VNC to KVMD/Streamer proxy' kvmd-vnc
+%sysusers_create_compat configs/os/sysusers.conf
 
 %post
-%{_bindir}/kvmd-gencert --do-the-thing
-%{_bindir}/kvmd-gencert --do-the-thing --vnc
+%systemd_post kvmd.service kvmd-nginx.service kvmd-vnc.service kvmd-ipmi.service kvmd-pst.service kvmd-otg.service kvmd-janus.service kvmd-watchdog.service
+
+if [ ! -e %{_sysconfdir}/kvmd/nginx/ssl/server.crt ]; then
+    kvmd-gencert --do-the-thing
+fi
+if [ ! -e %{_sysconfdir}/kvmd/vnc/ssl/server.crt ]; then
+    kvmd-gencert --do-the-thing --vnc
+fi
+for target in nginx vnc; do
+    chown root:root %{_sysconfdir}/kvmd/$target/ssl || true
+    owner="root:kvmd-$target"
+    path="%{_sysconfdir}/kvmd/$target/ssl/server.key"
+    if [ ! -L "$path" ]; then
+        chown "$owner" "$path" || true
+        chmod 440 "$path" || true
+    fi
+    path="%{_sysconfdir}/kvmd/$target/ssl/server.crt"
+    if [ ! -L "$path" ]; then
+        chown "$owner" "$path" || true
+        chmod 444 "$path" || true
+    fi
+done
+
+%tmpfiles_create %{_tmpfilesdir}/kvmd.conf
+
+%preun
+%systemd_preun kvmd.service kvmd-nginx.service kvmd-vnc.service kvmd-ipmi.service kvmd-pst.service kvmd-otg.service kvmd-janus.service kvmd-watchdog.service
+
+%postun
+%systemd_postun_with_restart kvmd.service kvmd-nginx.service kvmd-vnc.service kvmd-ipmi.service kvmd-pst.service kvmd-otg.service kvmd-janus.service kvmd-watchdog.service
 
 %files
-%doc README.md
-%license LICENSE
-%dir %{_sysconfdir}/kvmd
-%config %attr(0600,kvmd,kvmd) %{_sysconfdir}/kvmd/htpasswd
-%config %attr(0600,kvmd-ipmi,kvmd-ipmi) %{_sysconfdir}/kvmd/ipmipasswd
-%config %attr(0600,kvmd-vnc,kvmd-vnc) %{_sysconfdir}/kvmd/vncpasswd
-%config %{_sysconfdir}/kvmd/*.yaml
-%config %{_sysconfdir}/kvmd/*.css
-%config %{_sysconfdir}/kvmd/janus/*.jcfg
-%{_unitdir}/*.service
-%exclude %{_unitdir}/kvmd-nginx.service
+%{python3_sitelib}/kvmd*
+%{_bindir}/kvmd*
+%{_unitdir}/*
+%{_udevrulesdir}/*.rules
 %{_sysusersdir}/kvmd.conf
 %{_tmpfilesdir}/kvmd.conf
-%{_datadir}/kvmd
-%exclude %{_datadir}/kvmd/web
-%exclude %{_datadir}/kvmd/configs.default
-%dir %{_sharedstatedir}/kvmd
-%attr(-,kvmd,root) %{_sharedstatedir}/kvmd/msd
-
-%files -n python3-%{name}
-%doc README.md
-%license LICENSE
-%{_bindir}/kvmd*
-%{python3_sitelib}/kvmd*
-
-%files web
-%doc README.md
-%license LICENSE
-%{_datadir}/kvmd/web
-
-%files config
-%doc README.md
-%license LICENSE
+%dir %{_datadir}/kvmd
 %{_datadir}/kvmd/configs.default
-
-%files config-fedora
-%doc README.md
-%license LICENSE
-%{_sysconfdir}/kvmd/main.yaml
-%{_sysconfdir}/systemd/system/kvmd.service.d/*
-
-%files nginx
-%doc README.md
-%license LICENSE
+%{_datadir}/kvmd/extras
+%{_datadir}/kvmd/hid
+%{_datadir}/kvmd/keymaps
+%{_datadir}/kvmd/switch
+%{_datadir}/kvmd/web
+%dir %{_sysconfdir}/kvmd
+%dir %{_sysconfdir}/kvmd/janus
 %dir %{_sysconfdir}/kvmd/nginx
-%{_sysconfdir}/kvmd/nginx/*.conf
-%dir %attr(0750,root,root) %{_sysconfdir}/kvmd/nginx/ssl
-%{_unitdir}/kvmd-nginx.service
+%dir %{_sysconfdir}/kvmd/override.d
+%dir %{_sysconfdir}/kvmd/vnc
+%config(noreplace) %{_sysconfdir}/kvmd/*.yaml
+%config(noreplace) %attr(0600,kvmd,kvmd) %{_sysconfdir}/kvmd/htpasswd
+%config(noreplace) %attr(0600,kvmd-ipmi,kvmd-ipmi) %{_sysconfdir}/kvmd/ipmipasswd
+%config(noreplace) %attr(0600,kvmd-vnc,kvmd-vnc) %{_sysconfdir}/kvmd/vncpasswd
+%config(noreplace) %attr(0600,kvmd,kvmd) %{_sysconfdir}/kvmd/totp.secret
+%config(noreplace) %{_sysconfdir}/kvmd/web.css
+%config(noreplace) %{_sysconfdir}/kvmd/janus/*.jcfg
+%config(noreplace) %{_sysconfdir}/kvmd/nginx/*.conf*
+%dir %{_sharedstatedir}/kvmd
+%attr(-,kvmd,root) %dir %{_sharedstatedir}/kvmd/msd
+%attr(-,kvmd-pst,root) %dir %{_sharedstatedir}/kvmd/pst
 
 %changelog
-* Sat Jan 07 2023 Tao Jin <tao-j@outlook.com> - 3.191-2
-- Add fake script to be used in generic server
-- Multiple clean-ups
-
-
-* Sat Jan 07 2023 Tao Jin <tao-j@outlook.com> - 3.191-1
-- Update to 3.191
-- Refactor spec file to comply with Fedora guideline and submit for review
-
-* Sun Oct 23 2022 Tao Jin <tao-j@outlook.com> - 3.156-1
-- Update to 3.156, add patch to remove unsupported type annotation
-
-* Sun Aug 28 2022 Oleg Girko <ol@infoserver.lv> - 3.50-1
-- Update to 3.50
-
-* Sun Jul 11 2021 Oleg Girko <ol@infoserver.lv> - 2.3-2
-- Require gpio-udev-rules
-
-* Fri Jul 09 2021 Oleg Girko <ol@infoserver.lv> - 2.3-1
-- Update to 2.3
-- Require getent and useradd utilities for preinstall script
-- Require gpio group
-
-* Wed Oct 21 2020 Oleg Girko <ol@infoserver.lv> - 2.2-2
-- Add patch to fix paths of various system utilities
-
-* Tue Oct 20 2020 Oleg Girko <ol@infoserver.lv> - 2.2-1
-- Update to 2.2
-
-* Sun Oct 11 2020 Oleg Girko <ol@infoserver.lv> - 2.1-1
-- Update to 2.1
-
-* Wed Oct 07 2020 Oleg Girko <ol@infoserver.lv> - 2.0-1
-- Update to 2.0
-
-* Wed Sep 23 2020 Oleg Girko <ol@infoserver.lv> - 1.102-2
-- Enable unit tests (just to check syntax)
-- Fix python3-libgpiod dependency
-
-* Fri Sep 18 2020 Oleg Girko <ol@infoserver.lv> - 1.102-1
-- Update to 1.102
-
-* Mon Sep 14 2020 Oleg Girko <ol@infoserver.lv> - 1.100-1
-- Update to 1.100
-
-* Tue Sep 01 2020 Oleg Girko <ol@infoserver.lv> - 1.98-1
-- Update to 1.98
-
-* Mon Aug 31 2020 Oleg Girko <ol@infoserver.lv> - 1.97-1
-- Update to 1.97
-
-* Tue Aug 25 2020 Oleg Girko <ol@infoserver.lv> - 1.95-1
-- Update to 1.95
-- Make kvmd-nginx subpackage require nginx
-
-* Fri Aug 21 2020 Oleg Girko <ol@infoserver.lv> - 1.92-2
-- Split more correctly into more subpackages
-
-* Thu Aug 20 2020 Oleg Girko <ol@infoserver.lv> - 1.92-1
-- Update to 1.91
-- Add subpackage with Nginx configs
-- Fix Nginx binary path in service file
-- Fix groups of kvmd user
-
-* Wed Aug 19 2020 Oleg Girko <ol@infoserver.lv> - 1.91-1
-- Update to 1.91
-- Fix patch to remove all uses of assignment expressions
-
-* Tue Aug 18 2020 Oleg Girko <ol@infoserver.lv> - 1.90-2
-- Fix runtime dependency
-- Drop unneeded build dependencies
-
-* Mon Aug 17 2020 Oleg Girko <ol@infoserver.lv> - 1.90-1
-- Initial import
+%autochangelog
