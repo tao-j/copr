@@ -1,6 +1,6 @@
 Name:           kvmd
 Version:        4.163
-Release:        %autorelease
+Release:        2%{?dist}
 Summary:        The main PiKVM daemon
 License: GPL-3.0-or-later
 URL:            https://github.com/pikvm/kvmd
@@ -114,8 +114,9 @@ Recommends:     tesseract-langpack-eng
 %{__sed} -i \
     -e '/kvmd-oled/d' \
     -e 's/^m kvmd uucp$/m kvmd dialout/' \
-    -e '/^m kvmd dialout$/a m kvmd video' \
+    -e 's/^m kvmd spi$/m kvmd video/' \
     configs/os/sysusers.conf
+
 
 %build
 %pyproject_wheel
