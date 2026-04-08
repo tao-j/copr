@@ -1,3 +1,0 @@
-#Type   Name    ID  GECOS                       Home directory      Shell
-u       janus   -   "Runs the Janus service"    /var/lib/janus      /sbin/nologin
-

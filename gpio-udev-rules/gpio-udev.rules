@@ -1,5 +1,0 @@
-# udev rules for GPIO ports
-
-# /dev/gpiochip*
-SUBSYSTEM=="gpio", GROUP="gpio", MODE="0660"
-
