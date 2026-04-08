@@ -1,6 +1,6 @@
 Name:           kvmd
 Version:        4.163
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        The main PiKVM daemon
 License: GPL-3.0-or-later
 URL:            https://github.com/pikvm/kvmd
@@ -54,7 +54,6 @@ Requires:       python3dist(async-lru)
 Requires:       python3dist(passlib)
 Requires:       python3dist(pyotp)
 Requires:       python3dist(qrcode)
-Requires:       python3dist(python-periphery)
 Requires:       python3dist(pyserial)
 Requires:       python3dist(pyserial-asyncio)
 Requires:       python3dist(setproctitle)
