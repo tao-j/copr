@@ -81,7 +81,7 @@ Requires:       python3dist(pyrad)
 Requires:       python3dist(python-ldap)
 Requires:       python3dist(zstandard)
 Requires:       python3dist(mako)
-Requires:       python3dist(luma-oled)
+# Requires:       python3dist(luma-oled)
 Requires:       python3dist(pyusb)
 Requires:       python3dist(pyudev)
 Requires:       python3dist(gpiod) >= 2
@@ -109,8 +109,10 @@ Recommends:     tesseract-langpack-eng
 %pyproject_buildrequires
 
 
-# Patch sysusers to remove arch specific uucp in favor of dialout, and add video
+# Patch sysusers to remove OLED support (avoiding i2c dependency),
+# remove arch specific uucp in favor of dialout, and add video
 %{__sed} -i \
+    -e '/kvmd-oled/d' \
     -e 's/^m kvmd uucp$/m kvmd dialout/' \
     -e '/^m kvmd dialout$/a m kvmd video' \
     configs/os/sysusers.conf
