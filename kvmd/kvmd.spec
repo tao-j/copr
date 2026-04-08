@@ -1,6 +1,6 @@
 Name:           kvmd
 Version:        4.163
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        The main PiKVM daemon
 License: GPL-3.0-or-later
 URL:            https://github.com/pikvm/kvmd
@@ -47,11 +47,6 @@ Requires:       group(gpio)
 %{?sysusers_requires_compat}
 Requires(pre):  %{_bindir}/getent
 Requires(pre):  %{_sbindir}/useradd
-
-
-%description
-The main PiKVM daemon, packaged for generic generic devices and/or SBCs.
-
 Requires:       python3dist(pyyaml)
 Requires:       python3dist(aiohttp)
 Requires:       python3dist(aiofiles)
@@ -101,7 +96,8 @@ Requires:       sudo
 Recommends:     tesseract
 Recommends:     tesseract-langpack-eng
 
-
+%description
+The main PiKVM daemon, packaged for generic generic devices and/or SBCs.
 
 %prep
 %autosetup -p1 
