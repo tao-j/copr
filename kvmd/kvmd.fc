@@ -1,0 +1,2 @@
+/run/kvmd(/.*)?    gen_context(system_u:object_r:httpd_var_run_t,s0)
+/tmp/kvmd-nginx(/.*)?    gen_context(system_u:object_r:httpd_tmp_t,s0)

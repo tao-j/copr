@@ -6,11 +6,15 @@ License: GPL-3.0-or-later
 URL:            https://github.com/pikvm/kvmd
 Source0:        %{url}/archive/v%{version}.tar.gz
 Source1:        generic.yaml
+Source2:        kvmd.te
+Source3:        kvmd.fc
+Patch0:         0001-health-psutil-thermal-fallback.patch
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-rpm
 BuildRequires:  systemd-rpm-macros
+BuildRequires:  selinux-policy-devel
 BuildRequires:  python3dist(pyyaml)
 BuildRequires:  python3dist(aiohttp)
 BuildRequires:  python3dist(aiofiles)
@@ -44,6 +48,7 @@ BuildRequires:  python3dist(pyudev)
 BuildRequires:  python3dist(gpiod) >= 2
 BuildRequires:  python3dist(ustreamer)
 Requires:       group(gpio)
+Requires:       policycoreutils
 %{?sysusers_requires_compat}
 Requires(pre):  %{_bindir}/getent
 Requires(pre):  %{_sbindir}/useradd
@@ -92,6 +97,7 @@ Requires:       nginx >= 1.25.1
 Requires:       openssl
 Requires:       sudo
 
+Recommends:     janus
 Recommends:     tesseract
 Recommends:     tesseract-langpack-eng
 
@@ -116,12 +122,29 @@ The main PiKVM daemon, packaged for generic generic devices and/or SBCs.
 %build
 %pyproject_wheel
 
+# Compile SELinux policy module
+cp %{SOURCE2} %{SOURCE3} .
+make -f /usr/share/selinux/devel/Makefile kvmd.pp
+
 %install
 %pyproject_install
 
 install -Dm755 -t %{buildroot}%{_bindir} scripts/kvmd-{bootconfig,gencert,certbot}
 install -dm755 %{buildroot}%{_unitdir}
 cp -rd configs/os/services/* %{buildroot}%{_unitdir}/
+
+# Patch kvmd-nginx.service: relabel nginx.conf after mkconf creates it.
+# The broader /run/kvmd relabeling (for kvmd.sock etc.) is done by kvmd.service.
+%{__sed} -i \
+    '/ExecStartPre=.*kvmd-nginx-mkconf/a ExecStartPre=/usr/sbin/restorecon /run/kvmd/nginx.conf' \
+    %{buildroot}%{_unitdir}/kvmd-nginx.service
+
+# Patch kvmd.service: relabel /run/kvmd after kvmd creates its socket.
+# Since kvmd-nginx starts After=kvmd.service, the socket will have the
+# correct httpd_var_run_t label before nginx ever tries to connect to it.
+%{__sed} -i \
+    '/^ExecStart=.*kvmd/a ExecStartPost=/usr/sbin/restorecon -R /run/kvmd' \
+    %{buildroot}%{_unitdir}/kvmd.service
 
 install -DTm644 configs/os/sysusers.conf %{buildroot}%{_sysusersdir}/kvmd.conf
 
@@ -173,6 +196,9 @@ install -Dm644 -T %{SOURCE1} %{buildroot}%{_sysconfdir}/kvmd/main.yaml
 mkdir -p %{buildroot}%{_udevrulesdir}
 echo 'SUBSYSTEM=="gpio", KERNEL=="gpiochip*", GROUP="gpio", MODE="0660"' > %{buildroot}%{_udevrulesdir}/99-kvmd-generic-gpio.rules
 
+# Install SELinux policy module
+install -Dm644 kvmd.pp %{buildroot}%{_datadir}/selinux/packages/kvmd.pp
+
 %pre
 %sysusers_create_compat configs/os/sysusers.conf
 
@@ -202,11 +228,27 @@ done
 
 %tmpfiles_create %{_tmpfilesdir}/kvmd.conf
 
+# SELinux: load the kvmd policy module.
+# This allows nginx (httpd_t) to connect to kvmd's Unix socket
+# (unconfined_service_t) and labels /run/kvmd files as httpd_var_run_t.
+semodule -i %{_datadir}/selinux/packages/kvmd.pp &>/dev/null || :
+if [ -d /run/kvmd ]; then
+    restorecon -Rv /run/kvmd &>/dev/null || :
+fi
+if [ -d /tmp/kvmd-nginx ]; then
+    restorecon -Rv /tmp/kvmd-nginx &>/dev/null || :
+fi
+
 %preun
 %systemd_preun kvmd.service kvmd-nginx.service kvmd-vnc.service kvmd-ipmi.service kvmd-pst.service kvmd-otg.service kvmd-janus.service kvmd-watchdog.service
 
 %postun
 %systemd_postun_with_restart kvmd.service kvmd-nginx.service kvmd-vnc.service kvmd-ipmi.service kvmd-pst.service kvmd-otg.service kvmd-janus.service kvmd-watchdog.service
+
+# SELinux: remove policy module on package removal
+if [ $1 -eq 0 ]; then
+    semodule -r kvmd &>/dev/null || :
+fi
 
 %files
 %{python3_sitelib}/kvmd*
@@ -215,6 +257,7 @@ done
 %{_udevrulesdir}/*.rules
 %{_sysusersdir}/kvmd.conf
 %{_tmpfilesdir}/kvmd.conf
+%{_datadir}/selinux/packages/kvmd.pp
 %dir %{_datadir}/kvmd
 %{_datadir}/kvmd/configs.default
 %{_datadir}/kvmd/extras

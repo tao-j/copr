@@ -1,0 +1,19 @@
+policy_module(kvmd, 1.0.0)
+
+require {
+    type httpd_t;
+    type unconfined_service_t;
+    type httpd_var_run_t;
+    class unix_stream_socket connectto;
+    class sock_file write;
+}
+
+# Allow nginx (httpd_t) to connect to the kvmd daemon's Unix socket.
+# kvmd runs as unconfined_service_t since no dedicated kvmd_t SELinux
+# domain exists yet. This is the minimum required to proxy requests
+# from nginx to the kvmd backend.
+allow httpd_t unconfined_service_t:unix_stream_socket connectto;
+
+# Allow nginx (httpd_t) to write to the kvmd socket file (sock_file class).
+# This is needed for the initial socket handshake before connectto.
+allow httpd_t httpd_var_run_t:sock_file write;
