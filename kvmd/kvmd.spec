@@ -1,6 +1,6 @@
 Name:           kvmd
 Version:        4.163
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        The main PiKVM daemon
 License: GPL-3.0-or-later
 URL:            https://github.com/pikvm/kvmd
